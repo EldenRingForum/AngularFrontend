@@ -7,10 +7,14 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FrontPageComponent } from './front-page/front-page.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FrontPageComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
