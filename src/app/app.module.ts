@@ -3,14 +3,16 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-
+import { CustomHttpInterceptor } from "./Services/Shared/CustomHttpInterceptor";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TestingComponent } from './Components/testing/testing.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TestingComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,11 @@ import { AppComponent } from './app.component';
         ]
       } as SocialAuthServiceConfig,
     },
-
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CustomHttpInterceptor,
+      multi: true
+    },
 
   ],
   bootstrap: [AppComponent]
@@ -44,9 +50,5 @@ export class AppModule { }
 
 /* 
 Skal skrives senere
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: CustomHttpInterceptor,
-      multi: true
-    }
+    
 */
