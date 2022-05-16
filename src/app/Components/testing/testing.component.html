@@ -1,21 +1,179 @@
-<div *ngFor="let item of users">
-    {{item.userName}}
-</div>
+<div class="row">
+    <div class="col-4">
+        <div *ngIf="isLoggedIn">
+            <button type="button" class="btn btn-primary" (click)="RemoveToken()">Logout</button>
+        </div>
 
-<br>
-<div>
-    <input type="text" name="UserName" id="UserName" [(ngModel)]="AuthDTO.userName">
-    
-    <h1 *ngIf="AuthDTO.userName" >{{AuthDTO.userName}}</h1>
-    <h1 *ngIf="newUser.userName"> {{newUser.userName}}</h1>
-</div>
-<div class="col">
-    <button class="txt-center btn-black" data-bs-dismiss="modal"
-        (click)="LoginWithGoogle()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
-            fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">
-            <path
-                d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z" />
-        </svg>
-    </button>
+    </div>
+    <div class="col-4">
+        <div *ngFor="let item of users">
+            {{item.userName}}
+        </div>
+
+        <div class="text-center">
+            <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#login">
+                Login
+
+            </button>
+        </div>
+        <br>
+        <div>
+            <input type="text" name="UserName" id="UserName" [(ngModel)]="AuthDTO.userName">
+
+            <h1 *ngIf="AuthDTO.userName">{{AuthDTO.userName}}</h1>
+            <h1 *ngIf="newUser.userName"> {{newUser.userName}}</h1>
+        </div>
+    </div>
+    <div class="col-4">
+        <div *ngIf="loading" class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <div class="modal fade" id="login">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h2 class="modal-title" id="exampleModalLabel"></h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#loginTab"
+                            type="button" role="tab">Login</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#register"
+                            type="button" role="tab">Register</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <!--Login With Identity Tab-->
+                    <div class="tab-pane fade show active" id="loginTab" role="tabpanel">
+                        <div class="pb-2">
+                            <form (ngSubmit)="LoginWithIdentity(identityDTO)" #loginForm="ngForm"
+                                class="ps-5 pe-5 pt-2 ">
+                                <div class="pt-3">
+                                    <input class="form-control" type="email" placeholder="Email" required
+                                        [(ngModel)]="identityDTO.email" name="email" #identityDTOemail="ngModel">
+                                    <div class="text-wrap"
+                                        [hidden]="identityDTOemail.valid || identityDTOemail.pristine">
+                                        Email is required
+                                    </div>
+                                    <br>
+                                    <input class="form-control " type="password" name="password" placeholder="Password"
+                                        required [(ngModel)]="identityDTO.password" #identityDTOpassword="ngModel">
+                                    <div class="text-wrap"
+                                        [hidden]="identityDTOpassword.valid || identityDTOpassword.pristine">
+                                        Password is required
+                                    </div>
+                                </div>
+                                <div class="row pt-5">
+                                    <div class="col ps-5">
+                                        <button type="button" class="btn btn-secondary ms-2"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                    <div class="col text-end pe-5">
+                                        <button type="submit" [disabled]="!loginForm.valid" data-bs-dismiss="modal"
+                                            class="btn btn-primary">Login</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                    <!--Register With Identity Tab-->
+                    <div class="tab-pane fade" id="register" role="tabpanel">
+                        <div class="pb-2">
+                            <form (ngSubmit)="RegisterUserWithIdentity(identityDTO)" #loginForm="ngForm"
+                                class="ps-5 pe-5 pt-2 ">
+                                <div class="pt-3">
+                                    <input class="form-control me-2" type="text" placeholder="Email" required
+                                        [(ngModel)]="identityDTO.email" name="email" #identityDTOemail="ngModel">
+                                    <div id="emailHelp" class="form-text">We'll share your email with everyone else.
+                                    </div>
+                                    <div class="text-wrap"
+                                        [hidden]="identityDTOemail.valid || identityDTOemail.pristine">
+                                        Email is required
+                                    </div>
+                                    <br>
+                                    <input class="form-control mb-2" type="password" name="password"
+                                        placeholder="Password" required [(ngModel)]="identityDTO.password"
+                                        #identityDTOpassword="ngModel">
+                                    <div class="text-wrap"
+                                        [hidden]="identityDTOpassword.valid || identityDTOpassword.pristine">
+                                        Password is required
+                                    </div>
+                                    <input class="form-control " type="password" name="confirmPassword"
+                                        placeholder="confirmPassword" required [(ngModel)]="identityDTO.confirmPassword" (ngModelChange)="CheckPassword()"
+                                        #identityDTOconfirmPassword="ngModel">
+                                    <div *ngIf="doesPasswordMatch">
+                                        {{doesPasswordMatch}}
+                                    </div>
+                                    <div class="text-wrap"
+                                        [hidden]="identityDTOconfirmPassword.valid || identityDTOconfirmPassword.pristine">
+
+                                    </div>
+                                    <div class="pt-1">
+                                        <input type="checkbox" name="rememberMe" class="form-check-input"
+                                            id="identityRememberMe" [(ngModel)]="identityDTO.rememberMe"
+                                            value="rememberMe" #identityDTORememberMe="ngModel">
+                                        <label class="form-check-label ps-1 " for="">
+                                            Remember Me
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row pt-5">
+                                    <div class="col ps-5">
+                                        <button type="button" class="btn btn-secondary ms-2"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                    <div class="col text-end pe-5">
+                                        <button type="submit" id="loginbutton" [disabled]="!loginForm.valid" data-bs-dismiss=""
+                                            class="btn btn-primary">Login</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="pb-2">
+                    <form action=""></form>
+                </div>
+                <div class="modal-footer text-center pt-1">
+                    <div class="col">
+                        <button class="txt-center btn-black" data-bs-dismiss="modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                                class="bi bi-twitch" viewBox="0 0 16 16">
+                                <path
+                                    d="M3.857 0 1 2.857v10.286h3.429V16l2.857-2.857H9.57L14.714 8V0H3.857zm9.714 7.429-2.285 2.285H9l-2 2v-2H4.429V1.143h9.142v6.286z" />
+                                <path d="M11.857 3.143h-1.143V6.57h1.143V3.143zm-3.143 0H7.571V6.57h1.143V3.143z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="col">
+                        <button class="txt-center btn-black" data-bs-dismiss="modal" (click)="LoginWithGoogle()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                                class="bi bi-google" viewBox="0 0 16 16">
+                                <path
+                                    d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="col">
+                        <button class="txt-center btn-black" data-bs-dismiss="modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                                class="bi bi-facebook" viewBox="0 0 16 16">
+                                <path
+                                    d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
