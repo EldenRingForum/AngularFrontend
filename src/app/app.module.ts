@@ -8,8 +8,8 @@ import { CustomHttpInterceptor } from "./Services/Shared/CustomHttpInterceptor";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TestingComponent } from './Components/testing/testing.component';
-import { FrontPageComponent } from './front-page/front-page.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { FrontPageComponent } from './Components/front-page/front-page.component';
+import { NavbarComponent } from './Components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
