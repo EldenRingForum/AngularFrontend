@@ -11,6 +11,7 @@ import { TestingComponent } from './Components/testing/testing.component';
 import { FrontPageComponent } from './Components/front-page/front-page.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import { ThreadComponent } from './Components/thread/thread.component';
+import { CategoriesComponent } from './Components/categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ThreadComponent } from './Components/thread/thread.component';
     TestingComponent,
     FrontPageComponent,
     NavbarComponent,
-    ThreadComponent
+    ThreadComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,
