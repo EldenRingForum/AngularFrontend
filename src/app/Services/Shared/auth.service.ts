@@ -48,14 +48,10 @@ export class AuthService {
   }
 
 
-  RegisterWithIdentity(email: string, password: string, confirmPassword: string, rememberMe: boolean): Observable<IdentityDTO> {
-    const url = `${this.identityUrl}login`
-    let IdentityDTO = new ClassIdentityDTO();
-    IdentityDTO.email = email
-    IdentityDTO.password = password
-    IdentityDTO.confirmPassword = confirmPassword
-    IdentityDTO.rememberMe = rememberMe
-    return this.http.post<IdentityDTO>(url, IdentityDTO)
+  RegisterWithIdentity(identity: IdentityDTO, rememberMe: boolean): Observable<IdentityDTO> {
+    const url = `${this.identityUrl}/registeruser`
+    identity.rememberMe = rememberMe
+    return this.http.post<IdentityDTO>(url, identity)
       .pipe(
         tap(res => console.log("http response", res))
       )
