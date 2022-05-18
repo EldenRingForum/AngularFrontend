@@ -1,2 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
-/* Gold color for text #897859*/
+/* Gold color for text #897859
+    #192324
+    #31403e
+    #677356
+    #bcbe8c
+    #d9d2b0
+    #f2d16d
+    #b07943
+    #466748
+*/
+
+
+
+
+
+/*Containers*/
+body{
+    background-color: #192324;
+}
+
+div{
+
+}
+
+#reply{
+    background-color: #31403e !important;
+    border-color: #677356 !important;
+}
+
+#listItem{
+    background-color: #31403e !important;
+    border-color: #677356 !important;
+}
+
+#top{
+    background-color: transparent;
+    border-color: #677356 !important;
+}
+
+/*Text*/
+h1, h2, h5, h6{
+    color: #d9d2b0;
+}
+
+p, th, td{
+    color: #d9d2b0;
+}
+
