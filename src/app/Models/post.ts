@@ -1,3 +1,6 @@
+import { Comment } from "./myComment";
+import { User } from "./user";
+
 export interface Post {
     id: number;
     title: string;
@@ -8,4 +11,5 @@ export interface Post {
     stickied: boolean;
     flaggedInapropriate: boolean;
     comments: Comment[];
+    user: User
 }

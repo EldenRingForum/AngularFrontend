@@ -6,10 +6,21 @@
             {{item.userName}}
         </div>
         
+        <div *ngIf="specificPost">
+            <div>
+                {{specificPost.title}}
+                {{specificPost.text}}
+                {{specificPost.user.userName}}
+            </div>
+            <ul >
+                <li *ngFor="let comment of specificPost.comments">
+                    {{comment.text}}
+                    {{comment.user.userName}}
+                </li>
+            </ul>
+        </div>
         <br>
         <div>
-            <input type="text" name="UserName" id="UserName" [(ngModel)]="AuthDTO.userName">
-            <h1 *ngIf="AuthDTO.userName"> {{AuthDTO.userName}}</h1>
             <h1 *ngIf="newUser.userName"> {{newUser.userName}}</h1>
         </div>
     </div>
