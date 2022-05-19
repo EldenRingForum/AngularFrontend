@@ -8,6 +8,8 @@
     #f2d16d
     #b07943
     #466748
+
+    #020001
 */
 
 
@@ -38,7 +40,31 @@ div{
     border-color: #677356 !important;
 }
 
+.navbar{
+    background-color: #020001;
+}
+
+.nav-link{
+    color: #d9d2b0 !important;
+}
+
+
+/*images*/
+#logo{
+    height: 50px;
+    width: auto;
+}
+
+#bannerContainer
+{
+    height: 400px;
+}
+
 /*Text*/
+*{
+    font-family: 'Times New Roman', Times, serif;
+}
+
 h1, h2, h5, h6{
     color: #d9d2b0;
 }
