@@ -8,7 +8,7 @@ import { ThreadComponent } from './Components/thread/thread.component';
 const routes: Routes = [
   { path: 'Main-Page', component: FrontPageComponent},
   { path: 'Thread/:id', component: ThreadComponent},
-  { path: 'Categories', component: CategoriesComponent},
+  { path: 'Categories/:id', component: CategoriesComponent},
   { path: 'Testing', component: TestingComponent },
   { path: '', redirectTo: 'Testing', pathMatch: 'full' }
 ];

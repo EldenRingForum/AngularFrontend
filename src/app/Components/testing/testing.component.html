@@ -2,26 +2,16 @@
     <div class="col-4">
     </div>
     <div class="col-4">
-        <div *ngFor="let item of users">
-            {{item.userName}}
-        </div>
         
-        <div *ngIf="specificPost">
-            <div>
-                {{specificPost.title}}
-                {{specificPost.text}}
-                {{specificPost.user.userName}}
-            </div>
-            <ul >
-                <li *ngFor="let comment of specificPost.comments">
-                    {{comment.text}}
-                    {{comment.user.userName}}
+        <div *ngIf="categories">
+            <ul>
+                <li *ngFor="let category of categories">
+                    <div class="text-primary" routerLink="/Categories/{{ category.id }}" >
+                        {{category.categoryName}}
+                        <img src={{category.imageLink}} alt="">
+                    </div>
                 </li>
             </ul>
-        </div>
-        <br>
-        <div>
-            <h1 *ngIf="newUser.userName"> {{newUser.userName}}</h1>
         </div>
     </div>
     <div class="col-4">
