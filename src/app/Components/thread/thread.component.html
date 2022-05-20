@@ -84,11 +84,11 @@
     <div class="input-group">
         <form (ngSubmit)="PostComment(comment)" #commentForm="ngForm" class="w-100">
             <textarea class="form-control" type="text" placeholder="Your reply here" required name="Text"
-                [(ngModel)]="comment.text" #identityDTOemail="ngModel" rows="16">
+                [(ngModel)]="comment.text" #Comment="ngModel" rows="16">
         </textarea>
             <div id="emailHelp" class="form-text">We'll share your email with everyone else.
             </div>
-            <div class="text-wrap" [hidden]="identityDTOemail.valid || identityDTOemail.pristine">
+            <div class="text-wrap" [hidden]="Comment.valid || Comment.pristine">
                 Your reply cant be empty
             </div>
             <button type="submit" [disabled]="!commentForm.valid" class="btn btn-primary text-white ">

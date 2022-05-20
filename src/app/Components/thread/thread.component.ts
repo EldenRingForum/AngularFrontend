@@ -27,8 +27,6 @@ export class ThreadComponent implements OnInit {
     this.authService.CheckTokenValidity()
       .subscribe(s => this.isLoggedIn = s)
     const id = +Number(this.route.snapshot.paramMap.get('id'));
-    console.log(id);
-    
     this.GetSpecificPost(id)
   }
 
@@ -48,12 +46,13 @@ export class ThreadComponent implements OnInit {
       .subscribe({
         next: ((res) => {
           console.log(res);
-          
+
         }),
         error: ((err) => {
           console.log(err.message);
-          
+
         })
       })
+    this.ngOnInit()
   }
 }

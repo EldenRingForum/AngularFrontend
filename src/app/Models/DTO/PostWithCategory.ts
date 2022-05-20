@@ -5,4 +5,5 @@ export interface PostWithCategoryDTO {
     post: Post;
     category: Category;
     commentAmount: number
+    timeOfCreation: string
 }

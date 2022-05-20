@@ -34,8 +34,4 @@ export class FrontPageComponent implements OnInit {
     this.postService.GetTop10Posts()
       .subscribe(res => this.postWithCategory = res)  
   }
-
-  counter(i: number) {
-    return new Array(i);
-  }
 }

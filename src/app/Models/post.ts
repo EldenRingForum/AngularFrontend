@@ -11,5 +11,20 @@ export interface Post {
     stickied: boolean;
     flaggedInapropriate: boolean;
     comments: Comment[];
+    commentAmount: number
+    user: User
+}
+
+export class ClassPost {
+    id: number;
+    title: string;
+    categoryId: number;
+    userId: number;
+    text: string;
+    dateOfCreation: string;
+    stickied: boolean;
+    flaggedInapropriate: boolean;
+    comments: Comment[];
+    commentAmount: number
     user: User
 }
