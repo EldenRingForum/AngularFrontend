@@ -4,6 +4,8 @@ import { Observable, Subject, debounceTime, switchMap } from 'rxjs';
 import { ClassExternalAuthDto, ExternalAuthDto } from 'src/app/Models/DTO/AuthDTO/ExternalAuthDTO';
 import { ClassIdentityDTO, IdentityDTO } from 'src/app/Models/DTO/AuthDTO/IdentityDTO';
 import { User, ClassUser } from 'src/app/Models/user';
+import { Category } from 'src/app/Models/category';
+import { CategoryService } from 'src/app/Services/category.service';
 import { AuthService } from 'src/app/Services/Shared/auth.service';
 import { UserService } from 'src/app/Services/user.service';
 
@@ -20,9 +22,8 @@ export class NavbarComponent implements OnInit {
   users: User[]
   AuthDTO = new ClassExternalAuthDto
   public identityDTO = new ClassIdentityDTO
-  test: Observable<string>
   password = new Subject<string>()
-
+  categories: Category[]
 
   // Values
   loading: boolean
@@ -36,6 +37,7 @@ export class NavbarComponent implements OnInit {
   private searchTerms$ = new Subject<string>();
 
   constructor(
+    private categoryService: CategoryService,
     private authService: AuthService
   ) { }
 
@@ -43,7 +45,15 @@ export class NavbarComponent implements OnInit {
     this.doesPasswordMatch = ""
     this.CheckToken()
     this.CheckPassword()
+    this.GetCategories()
   }
+
+  GetCategories()
+  {
+    this.categoryService.GetCategories()
+      .subscribe(s => this.categories = s)
+  }
+
 
   //#endregion Check Password with ConfirmPassword
   CreateStringObs(confirmPassword: string): Observable<string> {

@@ -5,25 +5,25 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="#">
-      <img id="logo" class="img-fluid" src="https://cdn.mmohuts.com/wp-content/uploads/2019/08/eldenring_604x423.jpg" alt="Elden Ring Forum">
+      <img id="logo" class="img-fluid" src="https://cdn.mmohuts.com/wp-content/uploads/2019/08/eldenring_604x423.jpg"
+        alt="Elden Ring Forum">
     </a>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+        <li class="nav-item" *ngFor="let category of categories" routerLink="/Categories/{{category.id}}">
+          <a href="" class="nav-link">
+            <p>
+              <img src={{category.imageLink}} alt="" class="rounded-circle flex-shrink-0" width="30">
+              {{category.categoryName}}
+            </p>
           </a>
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
         </li>
+
       </ul>
-      
+
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
@@ -33,7 +33,7 @@
           <div class="row">
             <div *ngIf="loading" class="spinner-border" role="status">
               <span class="visually-hidden">Loading...</span>
-          </div>
+            </div>
             <div *ngIf="errorMessage" class="col-8 pt-2 text-nowrap">
               {{errorMessage}}
             </div>
