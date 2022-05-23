@@ -18,11 +18,16 @@
 
 /*Containers*/
 body{
+    background-image: url("https://previews.123rf.com/images/srckomkrit/srckomkrit1607/srckomkrit160703803/60309471-grunge-de-edad-la-textura-sucia.jpg");
+    background-size: cover;
     background-color: #192324;
 }
 
-div{
-
+#bgOverlay{
+    background-color: #192324;
+    opacity: 0.95;
+    height: 100%;
+    width: 100%;
 }
 
 #reply{
