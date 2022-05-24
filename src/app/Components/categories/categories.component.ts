@@ -46,7 +46,6 @@ export class CategoriesComponent implements OnInit {
     this.postService.PostThread(thread)
       .subscribe(s => {
         console.log(s.user.userName);
-        
         s.commentAmount = 0
         this.posts.unpinnedPosts.push(s)
       })
@@ -59,7 +58,50 @@ export class CategoriesComponent implements OnInit {
         console.log(res);
       }),
       error: ((err) => {
-        console.log(err.message);
+        console.log(err);
+      })
+    })
+  }
+
+  WarnUser(id: number){
+    this.adminService.WarnUser(id)
+    .subscribe({
+      next: ((res) => {
+        console.log(res);
+      }),
+      error: ((err) => {
+        console.log(err);
+      })
+    })
+  }
+
+  BanUser(id: number){
+    this.adminService.BanUser(id)
+    .subscribe({
+      next: ((res) => {
+        console.log(res);
+      }),
+      error: ((err) => {
+        console.log(err);
+      })
+    })
+  }
+
+  PinUnpinThread(post: Post){
+    this.adminService.PinUnpinThread(post)
+    .subscribe({
+      next: ((res) => {
+        if (res) {
+          this.posts.unpinnedPosts = this.posts.unpinnedPosts.filter(unpinnedPost => unpinnedPost !== post)
+          this.posts.pinnedPosts.push(post)
+        }
+        else{
+          this.posts.pinnedPosts = this.posts.pinnedPosts.filter(pinnedPosts => pinnedPosts !== post)
+          this.posts.unpinnedPosts.push(post)
+        }
+      }),
+      error: ((err) => {
+        console.log(err);
       })
     })
   }

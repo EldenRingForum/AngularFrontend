@@ -24,8 +24,8 @@
                         <td routerLink="/Thread/{{post.id}}">Dunno hvad View er</td>
                         <td routerLink="/Thread/{{post.id}}">Dunno hvad activity er</td>
                         <td>
-                            <div class="dropdown float-end">
-                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                            <div class="dropdown float-end" *ngIf="loggedIn">
+                                <a class="btn btn-secondary " href="#" role="button"
                                     id="dropdownMenuLink" data-bs-toggle="dropdown">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-three-dots-vertical" viewBox="0 0 16 16" id="dropdownMenuButton1"
@@ -34,11 +34,14 @@
                                             d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
                                     </svg>
                                 </a>
-                               
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     <li><a class="dropdown-item" (click)="DeleteThread(post)">Delete</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    <li><a class="dropdown-item" (click)="PinUnpinThread(post)">Pin or Unpin</a>
+                                    </li>
+                                    <li><a class="dropdown-item" (click)="BanUser(post.user.id)">Ban the user</a>
+                                    </li>
+                                    <li><a class="dropdown-item" (click)="WarnUser(post.user.id)">Warn the user</a>
+                                    </li>
                                 </ul>
                             </div>
                         </td>
@@ -58,19 +61,33 @@
                 </thead>
                 <tbody *ngFor="let post of posts.unpinnedPosts">
                     <tr>
-                        <td>{{post.title}}</td>
-                        <td>{{post.user.userName}}</td>
-                        <td>{{post.commentAmount}}</td>
-                        <td>Dunno hvad View er</td>
-                        <td>Dunno hvad activity er</td>
+                        <td routerLink="/Thread/{{post.id}}">{{post.title}}</td>
+                        <td routerLink="/Thread/{{post.id}}">{{post.user.userName}}</td>
+                        <td routerLink="/Thread/{{post.id}}">{{post.commentAmount}}</td>
+                        <td routerLink="/Thread/{{post.id}}">Dunno hvad View er</td>
+                        <td routerLink="/Thread/{{post.id}}">Dunno hvad activity er</td>
                         <td>
-                            <button type="button" class="btn btn-dark float-end">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                                    <path
-                                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                                </svg>
-                            </button>
+                            <div class="dropdown float-end" *ngIf="loggedIn">
+                                <a class="btn btn-secondary"  role="button"
+                                    id="dropdownMenuLink" data-bs-toggle="dropdown">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-three-dots-vertical" viewBox="0 0 16 16" id="dropdownMenuButton1"
+                                        data-bs-toggle="dropdown">
+                                        <path
+                                            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                    </svg>
+                                </a>
+
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" (click)="DeleteThread(post)">Delete</a></li>
+                                    <li><a class="dropdown-item" (click)="PinUnpinThread(post)">Pin or Unpin</a>
+                                    </li>
+                                    <li><a class="dropdown-item" (click)="BanUser(post.user.id)">Ban the user</a>
+                                    </li>
+                                    <li><a class="dropdown-item" (click)="WarnUser(post.user.id)">Warn the user</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </td>
                     </tr>
 

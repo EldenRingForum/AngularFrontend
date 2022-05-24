@@ -2,18 +2,50 @@
     <div class="col-4">
     </div>
     <div class="col-4">
-        
-        <div *ngIf="categories">
-            <ul>
-                <li *ngFor="let category of categories">
-                    <div class="text-primary" routerLink="/Categories/{{ category.id }}" >
-                        {{category.categoryName}}
-                        <img src={{category.imageLink}} alt="">
-                    </div>
-                </li>
-            </ul>
+
+        <form (ngSubmit)="SubmitPicture(newUser)" #UpdatePfpForm="ngForm">
+            <div>
+                <input class="form-control " type="file" name="pfp" placeholder="pfp" required [(ngModel)]="file"
+                    #UserPfp="ngModel" (change)="SelectAndConvertFile($event);">
+                <div class="text-wrap" [hidden]="UserPfp.valid || UserPfp.pristine">
+                    Password is required
+                </div>
+            </div>
+            <button type="submit" [disabled]="!UpdatePfpForm.valid">
+                Save
+            </button>
+        </form>
+
+        <form (ngSubmit)="UpdatePassword(UpdatePasswordDTO)" #UpdatePasswordForm="ngForm" class="ps-5 pe-5 pt-2 ">
+            <!--Old Password-->
+            <input class="form-control " type="password" name="password" placeholder="Password" required
+                [(ngModel)]="UpdatePasswordDTO.oldPassword" #identityDTOOldpassword="ngModel">
+            <div class="text-wrap" [hidden]="identityDTOOldpassword.valid || identityDTOOldpassword.pristine">
+                Password is required
+            </div>
+            <!--New Password-->
+            <input class="form-control " type="password" name="newPassword" #identityDTONewPassword="ngModel"
+                placeholder="newPassword" required [(ngModel)]="UpdatePasswordDTO.newPassword">
+            <div class="text-wrap" [hidden]="identityDTONewPassword.valid || identityDTONewPassword.pristine">
+                Confirm password is required
+            </div>
+            <div class="col text-end pe-5">
+                <button type="submit" id="loginbutton" [disabled]="!UpdatePasswordForm.valid" data-bs-dismiss="modal"
+                    class="btn btn-primary">Update Password</button>
+            </div>
+            <div class="text-primary" *ngIf="errorMessage">
+                {{errorMessage}}
+            </div>
+        </form>
+        <div *ngIf="image">
+            <img [src]="image" alt="Profile picture" class="rounded" width="200px" height="200px">
         </div>
+
     </div>
     <div class="col-4">
+        <div *ngIf="user">
+            {{user.userName}}
+            <img src={{user.profilePicture}} alt="" class="rounded" width="200px" height="200px">
+        </div>
     </div>
 </div>

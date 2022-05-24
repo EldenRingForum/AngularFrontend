@@ -10,7 +10,7 @@ import { Comment } from './Models/myComment';
 })
 export class AdminService {
 
-  private adminUrl = "api/admin"
+  private adminUrl = "api/Admin"
   
   constructor(
     private http: HttpClient
@@ -25,33 +25,33 @@ export class AdminService {
     )
   }
 
-  DeleteComment(id: number, comment: Comment): Observable<Comment> { 
-    const url = `${this.adminUrl}/${id}`
+  DeleteComment(comment: Comment): Observable<Comment> { 
+    const url = `${this.adminUrl}/DeleteComment`
     return this.http.put<Comment>(url, comment)
     .pipe(
       tap(res => console.log("Deleted Comment ", res))
     )
   }
 
-  PinUnpinPost(id: Number, post: Post): Observable<Post>{
-    const url = `${this.adminUrl}/${id}`
-    return this.http.put<Post>(url, post)
+  PinUnpinThread(post: Post): Observable<boolean>{
+    const url = `${this.adminUrl}/PinUnpin`
+    return this.http.put<boolean>(url, post)
     .pipe(
-      tap(res => console.log("Pinned = ", res.stickied))
+      tap(res => console.log("Pinned = ", res))
     )
   }
 
-  WarnUser(id: number, user: User): Observable<User>{
+  WarnUser(id: number): Observable<User>{
     const url = `${this.adminUrl}/${id}`
-    return this.http.put<User>(url, user)
+    return this.http.put<User>(url, "user")
     .pipe(
       tap(res => console.log("Warned User ", res))
     )
   }
 
-  BanUser(id: number, user: User): Observable<User>{
-    const url = `${this.adminUrl}/${id}`
-    return this.http.put<User>(url, user)
+  BanUser(id: number): Observable<User>{
+    const url = `${this.adminUrl}/BanUser/${id}`
+    return this.http.put<User>(url, "user")
     .pipe(
       tap(res => console.log("Banned User ", res))
     )

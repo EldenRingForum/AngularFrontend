@@ -12,20 +12,29 @@
                     <h1>{{specificPost.title}}<span class="fs-6"> by</span></h1>
                 </div>
                 <div class="col-3">
-                    <img src="https://i.pinimg.com/736x/74/b3/54/74b35486d3a1f639519ba0cf12821016.jpg" class="img-thumbnail w-100"
-                        alt="Thumbnail">
+                    <img src="https://i.pinimg.com/736x/74/b3/54/74b35486d3a1f639519ba0cf12821016.jpg"
+                        class="img-thumbnail w-100" alt="Thumbnail">
                     <p>#1</p>
                 </div>
                 <div class="col-9">
                     <h2>{{specificPost.user.userName}}</h2>
                     <p class="text-wrap">{{specificPost.text}}</p>
-                    <button type="button" class="btn btn-dark float-end">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                            <path
-                                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                        </svg>
-                    </button>
+                    <div class="dropdown float-end" *ngIf="loggedIn">
+                        <a class="btn btn-secondary" href="#" role="button" id="dropdownMenuLink"
+                            data-bs-toggle="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-three-dots-vertical" viewBox="0 0 16 16" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown">
+                                <path
+                                    d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                            </svg>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" (click)="DeletePost(specificPost)">Delete</a></li>
+                            <li><a class="dropdown-item" (click)="BanUser(specificPost.user.id)">Ban the user</a></li>
+                            <li><a class="dropdown-item" (click)="WarnUser(specificPost.user.id)">Warn the user</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -33,26 +42,35 @@
             <div class="row  border-bottom border-secondary border-2 pt-5"
                 *ngFor='let comment of specificPost.comments ;let i = index'>
                 <div class="col-3">
-                    <img src="https://i.pinimg.com/736x/74/b3/54/74b35486d3a1f639519ba0cf12821016.jpg" class="img-thumbnail w-100"
-                        alt="Thumbnail">
+                    <img src="https://i.pinimg.com/736x/74/b3/54/74b35486d3a1f639519ba0cf12821016.jpg"
+                        class="img-thumbnail w-100" alt="Thumbnail">
                     <p>#{{i+2}}</p>
                 </div>
                 <div class="col-9">
                     <h2>{{comment.user.userName}}</h2>
                     <p class="text-wrap">{{comment.text}}</p>
-                    <button type="button" class="btn btn-dark float-end">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                            <path
-                                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                        </svg>
-                    </button>
+                    <div class="dropdown float-end" *ngIf="loggedIn">
+                        <a class="btn btn-secondary" href="#" role="button" id="dropdownMenuLink"
+                            data-bs-toggle="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-three-dots-vertical" viewBox="0 0 16 16" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown">
+                                <path
+                                    d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                            </svg>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" (click)="DeleteComment(i, comment)">Delete</a></li>
+                            <li><a class="dropdown-item" (click)="BanUser(specificPost.user.id)">Ban the user</a></li>
+                            <li><a class="dropdown-item" (click)="WarnUser(specificPost.user.id)">Warn the user</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="col-1">
-            <div *ngIf="isLoggedIn" class=" sticky-top" style="top: 10%;">
+            <div *ngIf="loggedIn" class=" sticky-top" style="top: 10%;">
                 <button type="button" class="btn btn-dark" data-bs-toggle="collapse" data-bs-target="#reply"
                     aria-expanded="false" aria-controls="collapseExample">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

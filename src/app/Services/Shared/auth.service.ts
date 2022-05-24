@@ -5,6 +5,7 @@ import { Observable, tap } from 'rxjs';
 import { AuthResponseDTO } from 'src/app/Models/DTO/AuthDTO/AuthResponseDTO';
 import { ExternalAuthDto } from 'src/app/Models/DTO/AuthDTO/ExternalAuthDTO';
 import { IdentityDTO, ClassIdentityDTO } from "src/app/Models/DTO/AuthDTO/IdentityDTO";
+import { UpdatePasswordDTO } from "src/app/Models/DTO/AuthDTO/UpdatePasswordDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -24,12 +25,16 @@ export class AuthService {
   public CheckTokenValidity(): Observable<boolean> {
     const url = `${this.tokenUrl}/checktoken`
     console.log("trying to check token")
-    return this.http.get<boolean>(url);
+    return this.http.get<boolean>(url)
+      .pipe(
+        tap(res => console.log("http response", res))
+      )
   }
 
   public RemoveToken(): Observable<boolean> {
     const url = `${this.tokenUrl}/removetoken`
     return this.http.get<boolean>(url)
+
   }
   //#endregion
 
@@ -54,6 +59,14 @@ export class AuthService {
     return this.http.post<IdentityDTO>(url, identity)
       .pipe(
         tap(res => console.log("http response", res))
+      )
+  }
+
+  UpdatePassword(passwords: UpdatePasswordDTO): Observable<boolean> {
+    const url = `${this.identityUrl}/UpdatePassword`
+    return this.http.put<boolean>(url, passwords)
+      .pipe(
+        tap(res => console.log("You tried to login = ", res))
       )
   }
   //#endregion

@@ -14,7 +14,7 @@ import { AdminService } from 'src/app/admin.service';
 export class ThreadComponent implements OnInit {
   specificPost: Post
   loading: boolean
-  isLoggedIn: boolean = false
+  loggedIn: boolean = false
   list: number
   public comment = new ClassComment
 
@@ -27,7 +27,7 @@ export class ThreadComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.CheckTokenValidity()
-      .subscribe(s => this.isLoggedIn = s)
+      .subscribe(s => this.loggedIn = s)
     const id = +Number(this.route.snapshot.paramMap.get('id'));
     this.GetSpecificPost(id)
   }
@@ -55,22 +55,51 @@ export class ThreadComponent implements OnInit {
       })
   }
 
-  WarnUser(){
-
-  }
-
-  BanUser(){
-
-  }
-
-  DeleteComment(id: number, comment: Comment){
-    this.adminService.DeleteComment(id, comment)
+  DeletePost(post: Post){
+    this.adminService.DeletePost(post)
     .subscribe({
       next: ((res) => {
         console.log(res);
       }),
       error: ((err) => {
-        console.log(err.message);
+        console.log(err);
+      })
+    })
+  }
+  
+  DeleteComment(index: number, comment: Comment){
+    this.adminService.DeleteComment(comment)
+    .subscribe({
+      next: ((res) => {
+        this.specificPost.comments[index].text = res.text
+        console.log(res);
+      }),
+      error: ((err) => {
+        console.log(err);
+      })
+    })
+  }
+
+  WarnUser(id: number){
+    this.adminService.WarnUser(id)
+    .subscribe({
+      next: ((res) => {
+        console.log(res);
+      }),
+      error: ((err) => {
+        console.log(err);
+      })
+    })
+  }
+
+  BanUser(id: number){
+    this.adminService.BanUser(id)
+    .subscribe({
+      next: ((res) => {
+        console.log(res);
+      }),
+      error: ((err) => {
+        console.log(err);
       })
     })
   }
