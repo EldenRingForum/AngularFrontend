@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from 'src/app/admin.service';
 import { Category } from 'src/app/Models/category';
 import { PostWithCategoryDTO } from 'src/app/Models/DTO/PostWithCategory';
+import { Comment } from 'src/app/Models/myComment';
 import { Post } from 'src/app/Models/post';
 import { CategoryService } from 'src/app/Services/category.service';
 import { PostService } from 'src/app/Services/post.service';
@@ -17,7 +19,7 @@ export class FrontPageComponent implements OnInit {
 
   constructor(
     private categoryService: CategoryService, 
-    private postService: PostService
+    private postService: PostService,
   ) { }
 
   ngOnInit(): void {
@@ -34,4 +36,6 @@ export class FrontPageComponent implements OnInit {
     this.postService.GetTop10Posts()
       .subscribe(res => this.postWithCategory = res)  
   }
+
+  
 }

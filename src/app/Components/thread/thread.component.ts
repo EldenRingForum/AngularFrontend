@@ -4,6 +4,7 @@ import { Post } from 'src/app/Models/post';
 import { ClassComment, Comment } from 'src/app/Models/myComment';
 import { ThreadService } from 'src/app/Services/thread.service';
 import { AuthService } from 'src/app/Services/Shared/auth.service';
+import { AdminService } from 'src/app/admin.service';
 
 @Component({
   selector: 'app-thread',
@@ -21,6 +22,7 @@ export class ThreadComponent implements OnInit {
     private route: ActivatedRoute,
     private threadService: ThreadService,
     private authService: AuthService,
+    private adminService: AdminService,
   ) { }
 
   ngOnInit(): void {
@@ -46,13 +48,30 @@ export class ThreadComponent implements OnInit {
       .subscribe({
         next: ((res) => {
           console.log(res);
-
         }),
         error: ((err) => {
           console.log(err.message);
-
         })
       })
-    this.ngOnInit()
+  }
+
+  WarnUser(){
+
+  }
+
+  BanUser(){
+
+  }
+
+  DeleteComment(id: number, comment: Comment){
+    this.adminService.DeleteComment(id, comment)
+    .subscribe({
+      next: ((res) => {
+        console.log(res);
+      }),
+      error: ((err) => {
+        console.log(err.message);
+      })
+    })
   }
 }

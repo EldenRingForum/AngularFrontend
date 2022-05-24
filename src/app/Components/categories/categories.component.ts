@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs';
+import { AdminService } from 'src/app/admin.service';
 import { Category } from 'src/app/Models/category';
 import { UnpinnedAndPinnedPostsDTO } from 'src/app/Models/DTO/UnpinnedAndPinnedPostsDTO';
-import { ClassPost } from 'src/app/Models/post';
+import { ClassPost, Post } from 'src/app/Models/post';
 import { CategoryService } from 'src/app/Services/category.service';
 import { PostService } from 'src/app/Services/post.service';
 import { AuthService } from 'src/app/Services/Shared/auth.service';
@@ -21,6 +22,7 @@ export class CategoriesComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
+    private adminService: AdminService,
     private postService: PostService
   ) { }
 
@@ -48,5 +50,17 @@ export class CategoriesComponent implements OnInit {
         s.commentAmount = 0
         this.posts.unpinnedPosts.push(s)
       })
+  }
+
+  DeleteThread(post: Post){
+    this.adminService.DeletePost(post)
+    .subscribe({
+      next: ((res) => {
+        console.log(res);
+      }),
+      error: ((err) => {
+        console.log(err.message);
+      })
+    })
   }
 }
