@@ -2,24 +2,58 @@
     <div class="row pt-5">
         <div class="col-1"></div>
         <div class="col-4">
-            <img src="https://i.pinimg.com/736x/74/b3/54/74b35486d3a1f639519ba0cf12821016.jpg" class="img-thumbnail w-100" alt="Thumbnail">
-            <button>change picture</button>
+            <img src="https://th.bing.com/th/id/R.6d49fae465727516ce155d382e8fddd7?rik=lC45egOXRAqDCg&riu=http%3a%2f%2fplayerhud.com%2fwp-content%2fuploads%2f2019%2f10%2fDOOM-Eternal-Key-Art.jpg&ehk=%2f8MnVmhbZiGcokOO0CD7jwRfBkRqdpd18Og%2b0nAOF58%3d&risl=&pid=ImgRaw&r=0"
+                class="img-thumbnail w-100" alt="Thumbnail">
+
+            <button type="button" class="btn btn-light border mt-4" data-bs-toggle="collapse" data-bs-target="#reply"
+                aria-expanded="false" aria-controls="collapseExample">
+                Change picture
+            </button>
         </div>
 
         <div class="col-2"></div>
 
         <div class="col-4">
-            <p>Username: Username</p>
+            <p class="text-custom">Username: Username</p>
             <p>Email: Email</p>
-            
-            <br>
+
             <br>
             <br>
 
-            <p>New Password</p>
-            <p>Confirm new password</p>
-            <p>Old password</p>
+
+            <form #PasswordForm="ngForm" class="">
+                <p>New Password</p>
+                <textarea class="form-control" type="text" placeholder="New password" required name="Text"
+                    #identityDTOemail="" rows="1">
+                </textarea>
+                <div class="text-wrap" [hidden]="">
+                    Field cant be empty
+                </div>
+
+                <p>Confirm New Password</p>
+                <textarea class="form-control" type="text" placeholder="Confirm New password" required
+                    name="Text" #identityDTOemail="" rows="1">
+                </textarea>
+                <div class="text-wrap" [hidden]="">
+                    Field cant be empty
+                </div>
+
+                <p>Old Password</p>
+                <textarea class="form-control" type="text" placeholder="Old password" required name="Text"
+                    #identityDTOemail="" rows="1">
+                </textarea>
+                <div class="text-wrap" [hidden]="">
+                    Field cant be empty
+                </div>
+
+
+
+                <button type="button" class="btn btn-light border" data-bs-toggle="collapse" data-bs-target="#reply"
+                    aria-expanded="false" aria-controls="collapseExample">
+                    Confirm
+                </button>
+            </form>
         </div>
-        <div class="col-1"></div> 
+        <div class="col-1"></div>
     </div>
 </div>
