@@ -12,6 +12,7 @@ import { FrontPageComponent } from './Components/front-page/front-page.component
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import { ThreadComponent } from './Components/thread/thread.component';
 import { CategoriesComponent } from './Components/categories/categories.component';
+import { UserprofileComponent } from './Components/userprofile/userprofile.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CategoriesComponent } from './Components/categories/categories.componen
     FrontPageComponent,
     NavbarComponent,
     ThreadComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    UserprofileComponent
   ],
   imports: [
     BrowserModule,
