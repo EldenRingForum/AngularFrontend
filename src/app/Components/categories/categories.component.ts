@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs';
 import { AdminService } from 'src/app/admin.service';
 import { Category } from 'src/app/Models/category';
+import { RoleCheckDTO } from 'src/app/Models/DTO/AuthDTO/RoleCheckDTO';
 import { UnpinnedAndPinnedPostsDTO } from 'src/app/Models/DTO/UnpinnedAndPinnedPostsDTO';
 import { ClassPost, Post } from 'src/app/Models/post';
 import { CategoryService } from 'src/app/Services/category.service';
@@ -17,7 +18,7 @@ import { AuthService } from 'src/app/Services/Shared/auth.service';
 export class CategoriesComponent implements OnInit {
   posts: UnpinnedAndPinnedPostsDTO
   thread = new ClassPost
-  loggedIn: boolean = false
+  roleCheck: RoleCheckDTO
 
   constructor(
     private route: ActivatedRoute,
@@ -29,7 +30,7 @@ export class CategoriesComponent implements OnInit {
   ngOnInit(): void {
     const id = +Number(this.route.snapshot.paramMap.get('id'));
     this.authService.CheckTokenValidity()
-      .subscribe(s => this.loggedIn = s)
+      .subscribe(s => this.roleCheck = s)
     this.GetUnpinnedPosts(id)
   }
 

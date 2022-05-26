@@ -23,10 +23,10 @@
                         <td routerLink="/Thread/{{post.id}}">{{post.commentAmount}}</td>
                         <td routerLink="/Thread/{{post.id}}">Dunno hvad View er</td>
                         <td routerLink="/Thread/{{post.id}}">Dunno hvad activity er</td>
-                        <td>
-                            <div class="dropdown float-end" *ngIf="loggedIn">
-                                <a class="btn btn-secondary " href="#" role="button"
-                                    id="dropdownMenuLink" data-bs-toggle="dropdown">
+                        <td *ngIf="roleCheck.loggedIn && roleCheck.isAdmin">
+                            <div class="dropdown float-end">
+                                <a class="btn btn-secondary " href="#" role="button" id="dropdownMenuLink"
+                                    data-bs-toggle="dropdown">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-three-dots-vertical" viewBox="0 0 16 16" id="dropdownMenuButton1"
                                         data-bs-toggle="dropdown">
@@ -66,10 +66,10 @@
                         <td routerLink="/Thread/{{post.id}}">{{post.commentAmount}}</td>
                         <td routerLink="/Thread/{{post.id}}">Dunno hvad View er</td>
                         <td routerLink="/Thread/{{post.id}}">Dunno hvad activity er</td>
-                        <td>
-                            <div class="dropdown float-end" *ngIf="loggedIn">
-                                <a class="btn btn-secondary"  role="button"
-                                    id="dropdownMenuLink" data-bs-toggle="dropdown">
+                        <td *ngIf="roleCheck.loggedIn && roleCheck.isAdmin">
+                            <div class="dropdown float-end">
+                                <a class="btn btn-secondary" role="button" id="dropdownMenuLink"
+                                    data-bs-toggle="dropdown">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-three-dots-vertical" viewBox="0 0 16 16" id="dropdownMenuButton1"
                                         data-bs-toggle="dropdown">
@@ -96,7 +96,7 @@
 
         </div>
         <div class="col-1">
-            <div class=" sticky-top" style="top: 10%;" *ngIf="loggedIn">
+            <div class=" sticky-top" style="top: 10%;" *ngIf="roleCheck.loggedIn">
                 <button type="button" class="btn btn-dark" data-bs-toggle="collapse" data-bs-target="#reply"
                     aria-expanded="false" aria-controls="collapseExample">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

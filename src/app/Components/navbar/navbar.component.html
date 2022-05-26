@@ -29,7 +29,7 @@
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
       <div class="text-center pe-2">
-        <div *ngIf="!isLoggedIn" class="container">
+        <div *ngIf="!roleCheck.loggedIn" class="container">
           <div class="row">
             <div *ngIf="loading" class="spinner-border" role="status">
               <span class="visually-hidden">Loading...</span>
@@ -45,7 +45,7 @@
             </div>
           </div>
         </div>
-        <div *ngIf="isLoggedIn">
+        <div *ngIf="roleCheck.loggedIn">
           <button type="button" class="btn btn-primary" (click)="RemoveToken()">Logout</button>
         </div>
       </div>

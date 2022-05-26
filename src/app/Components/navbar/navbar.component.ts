@@ -8,6 +8,7 @@ import { Category } from 'src/app/Models/category';
 import { CategoryService } from 'src/app/Services/category.service';
 import { AuthService } from 'src/app/Services/Shared/auth.service';
 import { UserService } from 'src/app/Services/user.service';
+import { RoleCheckDTO } from 'src/app/Models/DTO/AuthDTO/RoleCheckDTO';
 
 @Component({
   selector: 'app-navbar',
@@ -24,10 +25,11 @@ export class NavbarComponent implements OnInit {
   public identityDTO = new ClassIdentityDTO
   password = new Subject<string>()
   categories: Category[]
+  roleCheck = new RoleCheckDTO
+
 
   // Values
   loading: boolean
-  isLoggedIn: boolean
   rememberMe: boolean
   doesPasswordMatch: string
   errorMessage: string
@@ -42,6 +44,9 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.roleCheck.loggedIn = false
+    this.roleCheck.isAdmin = false
+
     this.doesPasswordMatch = ""
     this.CheckToken()
     this.CheckPassword()
@@ -55,7 +60,7 @@ export class NavbarComponent implements OnInit {
   }
 
 
-  //#endregion Check Password with ConfirmPassword
+  //#region Check Password with ConfirmPassword
   CreateStringObs(confirmPassword: string): Observable<string> {
     this.doesPasswordMatch$ = new Observable<string>(s => {
       if (this.identityDTO.password === undefined || this.identityDTO.password == "") {
@@ -94,7 +99,7 @@ export class NavbarComponent implements OnInit {
     this.authService.CheckTokenValidity()
       .subscribe({
         next: ((res) => {
-          this.isLoggedIn = res
+          this.roleCheck = res
         })
       })
   }
@@ -103,7 +108,8 @@ export class NavbarComponent implements OnInit {
     this.authService.RemoveToken()
       .subscribe({
         next: ((res) => {
-          this.isLoggedIn = res
+          this.roleCheck.loggedIn = res
+          this.roleCheck.isAdmin = false
         })
       })
   }
@@ -117,7 +123,7 @@ export class NavbarComponent implements OnInit {
         next: ((res) => {
           this.newUser.userName = res.userName
           console.log("completed with res: ", res)
-          this.isLoggedIn = true
+          this.roleCheck.loggedIn = true
           this.loading = false
           identityDTO = new ClassIdentityDTO
         }),
@@ -138,7 +144,7 @@ export class NavbarComponent implements OnInit {
         next: ((res) => {
           this.newUser.userName = res.userName
           console.log("completed with res: ", res)
-          this.isLoggedIn = true
+          this.roleCheck.loggedIn = true
           this.loading = false
         }),
         error: ((err) => {
@@ -166,7 +172,7 @@ export class NavbarComponent implements OnInit {
       .subscribe({
         next: ((res) => {
           this.newUser.userName = res.message
-          this.isLoggedIn = true
+          this.roleCheck.loggedIn = true
           this.loading = false
         }),
         error: ((msg) => {

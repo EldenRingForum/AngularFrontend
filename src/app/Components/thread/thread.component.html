@@ -12,14 +12,14 @@
                     <h1>{{specificPost.title}}<span class="fs-6"> by</span></h1>
                 </div>
                 <div class="col-3">
-                    <img src="https://i.pinimg.com/736x/74/b3/54/74b35486d3a1f639519ba0cf12821016.jpg"
+                    <img src={{specificPost.user.profilePicture}}
                         class="img-thumbnail w-100" alt="Thumbnail">
                     <p>#1</p>
                 </div>
                 <div class="col-9">
                     <h2>{{specificPost.user.userName}}</h2>
                     <p class="text-wrap">{{specificPost.text}}</p>
-                    <div class="dropdown float-end" *ngIf="loggedIn">
+                    <div class="dropdown float-end" *ngIf="roleCheck.isAdmin">
                         <a class="btn btn-secondary" href="#" role="button" id="dropdownMenuLink"
                             data-bs-toggle="dropdown">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -42,14 +42,14 @@
             <div class="row  border-bottom border-secondary border-2 pt-5"
                 *ngFor='let comment of specificPost.comments ;let i = index'>
                 <div class="col-3">
-                    <img src="https://i.pinimg.com/736x/74/b3/54/74b35486d3a1f639519ba0cf12821016.jpg"
+                    <img src={{comment.user.profilePicture}}
                         class="img-thumbnail w-100" alt="Thumbnail">
                     <p>#{{i+2}}</p>
                 </div>
                 <div class="col-9">
                     <h2>{{comment.user.userName}}</h2>
                     <p class="text-wrap">{{comment.text}}</p>
-                    <div class="dropdown float-end" *ngIf="loggedIn">
+                    <div class="dropdown float-end" *ngIf="roleCheck.loggedIn">
                         <a class="btn btn-secondary" href="#" role="button" id="dropdownMenuLink"
                             data-bs-toggle="dropdown">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -70,7 +70,7 @@
         </div>
 
         <div class="col-1">
-            <div *ngIf="loggedIn" class=" sticky-top" style="top: 10%;">
+            <div *ngIf="roleCheck.loggedIn" class=" sticky-top" style="top: 10%;">
                 <button type="button" class="btn btn-dark" data-bs-toggle="collapse" data-bs-target="#reply"
                     aria-expanded="false" aria-controls="collapseExample">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

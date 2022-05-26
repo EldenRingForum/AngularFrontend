@@ -5,6 +5,7 @@ import { ClassComment, Comment } from 'src/app/Models/myComment';
 import { ThreadService } from 'src/app/Services/thread.service';
 import { AuthService } from 'src/app/Services/Shared/auth.service';
 import { AdminService } from 'src/app/admin.service';
+import { RoleCheckDTO } from 'src/app/Models/DTO/AuthDTO/RoleCheckDTO';
 
 @Component({
   selector: 'app-thread',
@@ -14,8 +15,8 @@ import { AdminService } from 'src/app/admin.service';
 export class ThreadComponent implements OnInit {
   specificPost: Post
   loading: boolean
-  loggedIn: boolean = false
   list: number
+  roleCheck = new RoleCheckDTO()
   public comment = new ClassComment
 
   constructor(
@@ -26,8 +27,10 @@ export class ThreadComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.roleCheck.loggedIn = false
+    this.roleCheck.isAdmin = false
     this.authService.CheckTokenValidity()
-      .subscribe(s => this.loggedIn = s)
+      .subscribe(s => this.roleCheck = s)
     const id = +Number(this.route.snapshot.paramMap.get('id'));
     this.GetSpecificPost(id)
   }
@@ -51,6 +54,15 @@ export class ThreadComponent implements OnInit {
         }),
         error: ((err) => {
           console.log(err.message);
+        })
+      })
+  }
+
+  CheckToken() {
+    this.authService.CheckTokenValidity()
+      .subscribe({
+        next: ((res) => {
+          this.roleCheck = res
         })
       })
   }

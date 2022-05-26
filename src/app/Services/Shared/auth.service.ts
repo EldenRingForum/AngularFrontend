@@ -5,6 +5,7 @@ import { Observable, tap } from 'rxjs';
 import { AuthResponseDTO } from 'src/app/Models/DTO/AuthDTO/AuthResponseDTO';
 import { ExternalAuthDto } from 'src/app/Models/DTO/AuthDTO/ExternalAuthDTO';
 import { IdentityDTO, ClassIdentityDTO } from "src/app/Models/DTO/AuthDTO/IdentityDTO";
+import { RoleCheckDTO } from 'src/app/Models/DTO/AuthDTO/RoleCheckDTO';
 import { UpdatePasswordDTO } from "src/app/Models/DTO/AuthDTO/UpdatePasswordDTO";
 
 @Injectable({
@@ -22,10 +23,10 @@ export class AuthService {
   ) { }
 
   //#region Token
-  public CheckTokenValidity(): Observable<boolean> {
+  public CheckTokenValidity(): Observable<RoleCheckDTO> {
     const url = `${this.tokenUrl}/checktoken`
     console.log("trying to check token")
-    return this.http.get<boolean>(url)
+    return this.http.get<RoleCheckDTO>(url)
       .pipe(
         tap(res => console.log("http response", res))
       )
