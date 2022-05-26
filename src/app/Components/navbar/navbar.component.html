@@ -1,24 +1,39 @@
-<nav class="navbar navbar-dark navbar-expand-lg">
+<nav class="navbar navbar-dark navbar-expand-lg shadow-lg">
   <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
-      aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+
     <a class="navbar-brand" href="#">
       <img id="logo" class="img-fluid" src="https://cdn.mmohuts.com/wp-content/uploads/2019/08/eldenring_604x423.jpg"
         alt="Elden Ring Forum">
     </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+      aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="#">
+            <div class="nav-btn">
+              <p class="text-nowrap m-0 mt-3">
+                <img
+                  src="https://eldenring.wiki.fextralife.com/file/Elden-Ring/finger_severer_elden_ring_wiki_guide_200px.png"
+                  alt="" class="rounded-circle flex-shrink-0" width="30">
+                Home
+              </p>
+            </div>
+          </a>
         </li>
         <li class="nav-item" *ngFor="let category of categories" routerLink="/Categories/{{category.id}}">
+
           <a href="" class="nav-link">
-            <p>
-              <img src={{category.imageLink}} alt="" class="rounded-circle flex-shrink-0" width="30">
-              {{category.categoryName}}
-            </p>
+            <div class="nav-btn ">
+              <p class="text-nowrap m-0 mt-3">
+                <img src={{category.imageLink}} alt="" class="rounded-circle flex-shrink-0" width="30">
+                {{category.categoryName}}
+              </p>
+            </div>
           </a>
         </li>
 

@@ -4,13 +4,15 @@ import { CategoriesComponent } from './Components/categories/categories.componen
 import { FrontPageComponent } from './Components/front-page/front-page.component';
 import { TestingComponent } from './Components/testing/testing.component';
 import { ThreadComponent } from './Components/thread/thread.component';
+import { UserprofileComponent } from './Components/userprofile/userprofile.component';
 
 const routes: Routes = [
-  { path: 'Main-Page', component: FrontPageComponent},
+  { path: 'Home', component: FrontPageComponent},
   { path: 'Thread/:id', component: ThreadComponent},
   { path: 'Categories/:id', component: CategoriesComponent},
+  { path: 'User', component: UserprofileComponent},
   { path: 'Testing', component: TestingComponent },
-  { path: '', redirectTo: 'Testing', pathMatch: 'full' }
+  { path: '', redirectTo: 'Home', pathMatch: 'full' }
 ];
 
 @NgModule({
