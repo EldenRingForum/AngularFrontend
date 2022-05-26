@@ -57,8 +57,3 @@ import { UserprofileComponent } from './Components/userprofile/userprofile.compo
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-/* 
-Skal skrives senere
-    
-*/
