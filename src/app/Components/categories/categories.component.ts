@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs';
-import { AdminService } from 'src/app/admin.service';
+import { AdminService } from 'src/app/Services/Shared/admin.service';
 import { Category } from 'src/app/Models/category';
 import { RoleCheckDTO } from 'src/app/Models/DTO/AuthDTO/RoleCheckDTO';
 import { UnpinnedAndPinnedPostsDTO } from 'src/app/Models/DTO/UnpinnedAndPinnedPostsDTO';

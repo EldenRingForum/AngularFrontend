@@ -4,7 +4,7 @@ import { Post } from 'src/app/Models/post';
 import { ClassComment, Comment } from 'src/app/Models/myComment';
 import { ThreadService } from 'src/app/Services/thread.service';
 import { AuthService } from 'src/app/Services/Shared/auth.service';
-import { AdminService } from 'src/app/admin.service';
+import { AdminService } from 'src/app/Services/Shared/admin.service';
 import { RoleCheckDTO } from 'src/app/Models/DTO/AuthDTO/RoleCheckDTO';
 
 @Component({

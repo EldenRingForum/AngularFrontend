@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from 'src/app/admin.service';
+import { AdminService } from 'src/app/Services/Shared/admin.service';
 import { Category } from 'src/app/Models/category';
 import { PostWithCategoryDTO } from 'src/app/Models/DTO/PostWithCategory';
 import { Comment } from 'src/app/Models/myComment';

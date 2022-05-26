@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, NgModule } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { Post } from './Models/post';
-import { User } from './Models/user';
-import { Comment } from './Models/myComment';
+import { Post } from 'src/app/Models/post';
+import { User } from 'src/app/Models/user';
+import { Comment } from 'src/app/Models/myComment';
 
 @Injectable({
   providedIn: 'root'
