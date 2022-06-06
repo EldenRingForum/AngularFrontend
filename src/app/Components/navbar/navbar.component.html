@@ -25,9 +25,9 @@
             </div>
           </a>
         </li>
-        <li class="nav-item" *ngFor="let category of categories" routerLink="/Categories/{{category.id}}">
+        <li class="nav-item" *ngFor="let category of categories" >
 
-          <a href="" class="nav-link">
+          <a href="" class="nav-link" routerLink="/Categories/{{category.id}}">
             <div class="nav-btn ">
               <p class="text-nowrap m-0 mt-3">
                 <img src={{category.imageLink}} alt="" class="rounded-circle flex-shrink-0" width="30">
