@@ -1,57 +1,63 @@
 <div class="container pt-5">
-    <div class="row pt-5">
+    <div class="row pt-5" *ngIf="user">
         <div class="col-1"></div>
         <div class="col-4">
-            <img src="https://th.bing.com/th/id/R.6d49fae465727516ce155d382e8fddd7?rik=lC45egOXRAqDCg&riu=http%3a%2f%2fplayerhud.com%2fwp-content%2fuploads%2f2019%2f10%2fDOOM-Eternal-Key-Art.jpg&ehk=%2f8MnVmhbZiGcokOO0CD7jwRfBkRqdpd18Og%2b0nAOF58%3d&risl=&pid=ImgRaw&r=0"
+            <img src={{user.profilePicture}}
                 class="img-thumbnail w-100" alt="Thumbnail">
-
-            <button type="button" class="btn btn-light border mt-4" data-bs-toggle="collapse" data-bs-target="#reply"
-                aria-expanded="false" aria-controls="collapseExample">
-                Change picture
-            </button>
+            <form (ngSubmit)="SubmitPicture(newUser)" #UpdatePfpForm="ngForm">
+                <div>
+                    <input class="form-control " type="file" name="pfp" placeholder="pfp" required [(ngModel)]="file"
+                        #UserPfp="ngModel" (change)="SelectAndConvertFile($event);">
+                </div>
+                <button type="submit" [disabled]="!UpdatePfpForm.valid" class="btn btn-light border mt-4"
+                    data-bs-toggle="collapse" data-bs-target="#reply" aria-expanded="false"
+                    aria-controls="collapseExample">
+                    Change picture
+                </button>
+            </form>
         </div>
 
         <div class="col-2"></div>
 
         <div class="col-4">
-            <p class="text-custom">Username: Username</p>
-            <p>Email: Email</p>
-
+            <p class="text-custom">Username: {{user.userName}}</p>
+            <p>Email: {{user.email}}</p>
             <br>
             <br>
-
-
-            <form #PasswordForm="ngForm" class="">
-                <p>New Password</p>
-                <textarea class="form-control" type="text" placeholder="New password" required name="Text"
-                    #identityDTOemail="" rows="1">
-                </textarea>
-                <div class="text-wrap" [hidden]="">
-                    Field cant be empty
-                </div>
-
-                <p>Confirm New Password</p>
-                <textarea class="form-control" type="text" placeholder="Confirm New password" required
-                    name="Text" #identityDTOemail="" rows="1">
-                </textarea>
-                <div class="text-wrap" [hidden]="">
-                    Field cant be empty
-                </div>
-
+            <form (ngSubmit)="UpdatePassword(UpdatePasswordDTO)" #UpdatePasswordForm="ngForm">
+                <!--Old Password-->
                 <p>Old Password</p>
-                <textarea class="form-control" type="text" placeholder="Old password" required name="Text"
-                    #identityDTOemail="" rows="1">
-                </textarea>
-                <div class="text-wrap" [hidden]="">
-                    Field cant be empty
+                <input class="form-control " type="password" name="password" placeholder="Password" required
+                    [(ngModel)]="UpdatePasswordDTO.oldPassword" #identityDTOOldpassword="ngModel">
+                <div class="text-wrap" [hidden]="identityDTOOldpassword.valid || identityDTOOldpassword.pristine">
+                    Password is required
                 </div>
+                <!--New Password-->
+                <p>New Password</p>
+                <input class="form-control " type="password" name="newPassword" #identityDTONewPassword="ngModel"
+                    placeholder="newPassword" required [(ngModel)]="UpdatePasswordDTO.newPassword">
+                <div class="text-wrap" [hidden]="identityDTONewPassword.valid || identityDTONewPassword.pristine">
+                    Confirm password is required
+                </div>
+                <p>Confirm New Password</p>
+                <input class="form-control " type="password" name="confirmNewPassword"
+                    #identityDTOConfirmNewPassword="ngModel" placeholder="confirm New Password" required
+                    [(ngModel)]="UpdatePasswordDTO.confirmNewPassword"  (ngModelChange)="Search(identityDTOConfirmNewPassword.value)">
+                <div class="text-wrap"
+                    [hidden]="identityDTOConfirmNewPassword.valid || identityDTOConfirmNewPassword.pristine">
+                    Confirm password is required
+                </div>
+                <div class="text-primary">
+                    {{doesPasswordMatch}}
 
-
-
-                <button type="button" class="btn btn-light border" data-bs-toggle="collapse" data-bs-target="#reply"
-                    aria-expanded="false" aria-controls="collapseExample">
-                    Confirm
-                </button>
+                </div>
+                <div class="pt-2">
+                    <button type="submit" id="loginbutton" [disabled]="!UpdatePasswordForm.valid"
+                        class="btn btn-light border">Update Password</button>
+                </div>
+                <div class="text-primary" *ngIf="errorMessage">
+                    {{errorMessage}}
+                </div>
             </form>
         </div>
         <div class="col-1"></div>

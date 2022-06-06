@@ -24,8 +24,8 @@ export class UserService {
       )
   }
 
-  public GetLoginName(): Observable<User>{
-    const url = `${this.UserUrl}/1`
+  public GetUserName(): Observable<User>{
+    const url = `${this.UserUrl}/GetUser`
     console.log("Getting users")
     return this.http.get<User>(url)
       .pipe(

@@ -48,7 +48,7 @@ export class TestingComponent implements OnInit {
   }
 
   GetUser() {
-    this.userService.GetLoginName()
+    this.userService.GetUserName()
       .subscribe(s => {
         this.user = s
       })
