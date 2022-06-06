@@ -20,4 +20,12 @@ export class CategoryService {
         tap(res => console.log("http res: ", res))
       )
   }
+
+  public GetCategoryName(id: number): Observable<Category> {
+    const url = `${this.CategoryUrl}/${id}`
+    return this.http.get<Category>(url)
+      .pipe(
+        tap(res => console.log("http res: ", res))
+      )
+  }
 }

@@ -18,20 +18,28 @@ import { AuthService } from 'src/app/Services/Shared/auth.service';
 export class CategoriesComponent implements OnInit {
   posts: UnpinnedAndPinnedPostsDTO
   thread = new ClassPost
-  roleCheck: RoleCheckDTO
+  roleCheck = new RoleCheckDTO
+  categoryName: string
 
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
     private adminService: AdminService,
-    private postService: PostService
+    private postService: PostService,
+    private categoryService: CategoryService
   ) { }
 
   ngOnInit(): void {
     const id = +Number(this.route.snapshot.paramMap.get('id'));
+    this.GetCategoryName(id)
     this.authService.CheckTokenValidity()
       .subscribe(s => this.roleCheck = s)
     this.GetUnpinnedPosts(id)
+  }
+
+  GetCategoryName(id: number){
+    this.categoryService.GetCategoryName(id)
+      .subscribe(s => this.categoryName = s.categoryName)
   }
 
   GetUnpinnedPosts(id: number) {

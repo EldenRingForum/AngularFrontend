@@ -25,7 +25,7 @@
             </div>
           </a>
         </li>
-        <li class="nav-item" *ngFor="let category of categories" >
+        <li class="nav-item" *ngFor="let category of categories">
 
           <a href="" class="nav-link" routerLink="/Categories/{{category.id}}">
             <div class="nav-btn ">
@@ -36,7 +36,18 @@
             </div>
           </a>
         </li>
-
+        <li class="nav-item" *ngIf="roleCheck.loggedIn">
+          <a class="nav-link active" routerLink="/User">
+            <div class="nav-btn">
+              <p class="text-nowrap m-0 mt-3">
+                <img
+                  src="https://eldenring.wiki.fextralife.com/file/Elden-Ring/shabriris_woe_talisman_elden_ring_wiki_guide_200px.png"
+                  alt="" class="rounded-circle flex-shrink-0" width="30">
+                Profile
+              </p>
+            </div>
+          </a>
+        </li>
       </ul>
 
       <form class="d-flex">

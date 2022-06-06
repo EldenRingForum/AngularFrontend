@@ -3,7 +3,8 @@ idv
     <div class="row mt-5">
         <div class="col-1"></div>
         <div class="col-10" *ngIf="posts">
-            <h1>Categories</h1>
+            
+            <h1 *ngIf="categoryName" >{{categoryName}}</h1>
             <h6>Pinned</h6>
             <table class="table table-dark table-hover">
                 <a href=""></a>

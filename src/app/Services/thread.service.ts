@@ -9,7 +9,8 @@ import { Post } from '../Models/post';
 })
 export class ThreadService {
 
-  private CommentUrl = "api/posts"
+  private PostUrl = "api/posts"
+  private CommentUrl = "api/comments"
 
   constructor(
     private http: HttpClient
@@ -17,7 +18,7 @@ export class ThreadService {
   ) { }
 
   public GetThread(id: number): Observable<Post>{
-    const url = `${this.CommentUrl}/${id}`
+    const url = `${this.PostUrl}/${id}`
     console.log("Getting Thread")
     return this.http.get<Post>(url)
       .pipe(

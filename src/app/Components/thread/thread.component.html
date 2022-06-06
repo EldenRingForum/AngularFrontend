@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-9">
                     <h2>{{specificPost.user.userName}}</h2>
-                    <p class="text-wrap">{{specificPost.text}}</p>
+                    <p class="text-break">{{specificPost.text}}</p>
                     <div class="dropdown float-end" *ngIf="roleCheck.isAdmin">
                         <a class="btn btn-secondary" href="#" role="button" id="dropdownMenuLink"
                             data-bs-toggle="dropdown">
@@ -48,7 +48,7 @@
                 </div>
                 <div class="col-9">
                     <h2>{{comment.user.userName}}</h2>
-                    <p class="text-wrap">{{comment.text}}</p>
+                    <p class="text-break">{{comment.text}}</p>
                     <div class="dropdown float-end" *ngIf="roleCheck.loggedIn">
                         <a class="btn btn-secondary" href="#" role="button" id="dropdownMenuLink"
                             data-bs-toggle="dropdown">

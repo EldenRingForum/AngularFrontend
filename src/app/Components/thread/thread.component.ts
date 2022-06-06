@@ -51,6 +51,7 @@ export class ThreadComponent implements OnInit {
       .subscribe({
         next: ((res) => {
           console.log(res);
+          this.specificPost.comments.push(res)
         }),
         error: ((err) => {
           console.log(err.message);
