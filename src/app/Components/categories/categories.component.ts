@@ -39,13 +39,17 @@ export class CategoriesComponent implements OnInit {
 
   GetCategoryName(id: number){
     this.categoryService.GetCategoryName(id)
-      .subscribe(s => this.categoryName = s.categoryName)
+      .subscribe(res => {
+        this.categoryName = res.categoryName
+        this.ngOnInit()
+      })
   }
 
   GetUnpinnedPosts(id: number) {
     this.postService.GetPostsFromCategory(id)
       .subscribe(res => {
         this.posts = res
+
       })
   }
 
