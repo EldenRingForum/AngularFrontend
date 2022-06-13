@@ -156,10 +156,15 @@ export class NavbarComponent implements OnInit {
   //#endregion
 
   //#region Google
+  /**
+   * loading bliver brugt til at vise om venter på et server respons
+   * authService.SigninWithGoogle bliver brugt at check om provider ID er korrekt
+   * Hvis respons er succesfuld laves der et nyt kald til vores server for at registrere dem
+   */
   LoginWithGoogle() {
     this.loading = true
     this.authService.SigninWithGoogle()
-      .then(res => {
+    .then(res => {
         const user: SocialUser = { ...res }
         this.AuthDTO.provider = user.provider
         this.AuthDTO.idToken = user.idToken
@@ -167,6 +172,12 @@ export class NavbarComponent implements OnInit {
       }, error => console.log(error))
   }
 
+  //her bliver kaldet til serveren gjort
+  /**
+   * @param externalAuthDTO
+   * externalAuthDTO bliver fyldt af google, og username kommer fra et felt
+   * Den laver kaldet til vores server, og logger provider.id og email.
+   */
   private ValidateExternalAuth(externalAuthDTO: ExternalAuthDto) {
     this.authService.GetHttpsCookieFromGoogle(externalAuthDTO)
       .subscribe({

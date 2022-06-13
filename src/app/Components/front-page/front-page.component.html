@@ -27,7 +27,7 @@
     <div class="col-lg-1"></div>
     <!-- <div class="col-lg-4" *ngFor="let item of items"> -->
     <div class="col-lg-5">
-      <h5>TOP</h5>
+      <h5>NEWEST</h5>
       <div class="list-group list-group-flush">
         <a id="top" href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true"
           routerLink="/Thread/{{dto.post.id}}" *ngFor='let dto of postWithCategory ;let i = index'>
@@ -36,8 +36,11 @@
               <div class="col">
                 <h6 class="mb-0">{{dto.post.title}}</h6>
               </div>
+              
               <div class="col text-end text-primary">
-                {{dto.commentAmount}}
+                <h6>
+                  {{dto.commentAmount}}
+                </h6>
               </div>
               <div class="col">
                 <p class="mb-0 opacity-75">
@@ -47,7 +50,9 @@
                 </p>
               </div>
               <div class="col text-end text-primary">
-                {{dto.timeOfCreation}}
+                <h6>
+                  {{dto.timeOfCreation}}
+                </h6>
               </div>
             </div>
           </div>
