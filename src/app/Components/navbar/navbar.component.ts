@@ -61,6 +61,7 @@ export class NavbarComponent implements OnInit {
 
 
   //#region Check Password with ConfirmPassword
+  // returnere den string som fejlen er 
   CreateStringObs(confirmPassword: string): Observable<string> {
     this.doesPasswordMatch$ = new Observable<string>(s => {
       if (this.identityDTO.password === undefined || this.identityDTO.password == "") {
@@ -82,10 +83,12 @@ export class NavbarComponent implements OnInit {
     return this.doesPasswordMatch$
   }
 
+  //funktionen der bliver kaldt for hver indtastet tegn, fra confirm password feltet.
   async Search(term: string) {
     await this.searchTerms$.next(term)
   }
 
+  // laver en observable hvor dens resultat er baseret ud fra en anden observable
   CheckPassword() {
     this.doesPasswordMatch$ = this.searchTerms$.pipe(
       debounceTime(500),
