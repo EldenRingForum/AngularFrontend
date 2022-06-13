@@ -30,7 +30,10 @@ export class ThreadComponent implements OnInit {
     this.roleCheck.loggedIn = false
     this.roleCheck.isAdmin = false
     this.authService.CheckTokenValidity()
-      .subscribe(s => this.roleCheck = s)
+      .subscribe(s => {
+        this.roleCheck = s
+        console.log(this.roleCheck.isAdmin);
+      })
     const id = +Number(this.route.snapshot.paramMap.get('id'));
     this.GetSpecificPost(id)
   }
@@ -79,7 +82,7 @@ export class ThreadComponent implements OnInit {
       })
     })
   }
-  
+
   DeleteComment(index: number, comment: Comment){
     this.adminService.DeleteComment(comment)
     .subscribe({
