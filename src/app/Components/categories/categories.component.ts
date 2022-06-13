@@ -9,6 +9,7 @@ import { ClassPost, Post } from 'src/app/Models/post';
 import { CategoryService } from 'src/app/Services/category.service';
 import { PostService } from 'src/app/Services/post.service';
 import { AuthService } from 'src/app/Services/Shared/auth.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-categories',
@@ -26,11 +27,23 @@ export class CategoriesComponent implements OnInit {
     private authService: AuthService,
     private adminService: AdminService,
     private postService: PostService,
-    private categoryService: CategoryService
-  ) { }
+    private categoryService: CategoryService,
+    private location: Location
+  ) {
+    this.location.onUrlChange(s => {
+      this.init(Number(s.substring(12)))
+    })
+   }
 
   ngOnInit(): void {
-    const id = +Number(this.route.snapshot.paramMap.get('id'));
+    let id = +Number(this.route.snapshot.paramMap.get('id'));
+    this.GetCategoryName(id)
+    this.authService.CheckTokenValidity()
+      .subscribe(s => this.roleCheck = s)
+    this.GetUnpinnedPosts(id)
+  }
+
+  init(id: number){
     this.GetCategoryName(id)
     this.authService.CheckTokenValidity()
       .subscribe(s => this.roleCheck = s)
@@ -39,13 +52,17 @@ export class CategoriesComponent implements OnInit {
 
   GetCategoryName(id: number){
     this.categoryService.GetCategoryName(id)
-      .subscribe(s => this.categoryName = s.categoryName)
+      .subscribe(res => {
+        this.categoryName = res.categoryName
+        //this.ngOnInit()
+      })
   }
 
   GetUnpinnedPosts(id: number) {
     this.postService.GetPostsFromCategory(id)
       .subscribe(res => {
         this.posts = res
+
       })
   }
 
